@@ -1,0 +1,8 @@
+docker run hello-world
+docker images | grep hello
+docker image inspect hello-world | less
+
+docker ps
+docker ps -a
+
+docker logs <nombre contenedor | id contenedor>
