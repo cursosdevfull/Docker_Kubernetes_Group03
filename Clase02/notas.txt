@@ -1,0 +1,58 @@
+Para imágenes
+=================
+
+docker image ls 
+docker images | grep busybox
+docker rmi busybox
+
+Para contenedores
+=======================
+docker stop <nombre contenedor | identificador del contenedor>
+docker rm <nombre contenedor | identificador del contenedor>
+docker rm -f <nombre contenedor | identificador del contenedor>
+
+docker ps   // contenedores en ejecución
+docker ps -a // contenedores en ejecución o no
+
+docker ps -a -q // lista solo la columna CONTAINER ID
+
+docker ps -a --filter ancestor=busybox -q // lista solo contenedores que basados en una imagen
+docker ps -a --filter ancestor=busybox -q | xargs docker rm -f // elimina los contenedores basados en una imagen 
+
+//////
+docker ps -a --filter ancestor=busybox -q
+a1233445
+b1333455
+//////
+xargs docker rm -f
+docker rm -f a1233445 b1333455
+
+docker run busybox
+docker pull busybox
+docker create busybox
+docker start <nombre contenedor | identificador del contenedor>
+
+docker run -p 80:80 nginx
+docker run -p 9020:80 httpd
+docker run --name server-nginx -p 8082:80 nginx
+docker ps | grep 8082
+docker ps -a | grep server-nginx
+
+docker ps -a --filter ancestor=nginx -q | xargs docker stop
+
+docker run -d --name server-nginx -p 8082:80 nginx
+
+docker attach server-nginx
+docker logs server-nginx
+
+docker run -d -p 9020:3000 -v d:/Cursos/Docker_Kubernetes_Group03/Clase02/nginx:/usr/share/nginx/html  -v d:/Cursos/Docker_Kubernetes_Group03/Clase02/nginx-data:/etc/nginx/conf.d  --name server-nginx4 nginx
+
+docker run -d -p 9030:80 -v /usr/share/nginx/html -v /etc/nginx/conf.d --name server-nginx5 nginx
+
+docker inspect server-nginx5
+
+docker run -d -p 9040:80 -v data-nginx:/usr/share/nginx/html --name server-nginx6 nginx
+
+docker rm -fv server-nginx5 // la opción -v solo aplica cuando el volumen es anónimo
+
+===============================================
