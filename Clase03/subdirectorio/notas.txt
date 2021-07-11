@@ -1,0 +1,4 @@
+Lista de contenedores
+- nginx 
+- centos 
+- nodejs
