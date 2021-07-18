@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  drupal:
+    image: drupal:8-apache
+    volumes:
+      - drupal:/var/www/html
+    ports:
+      - 8080:80
+    networks:
+      - net-test
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:10
+    volumes:
+      - $PWD/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: 12345
+    networks:
+      - net-test
+
+volumes:
+  drupal:
+
+networks:
+  net-test:

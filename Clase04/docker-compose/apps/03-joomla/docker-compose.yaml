@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  web:
+    image: joomla
+    volumes:
+      - $PWD/html:/var/www/html
+    ports:
+      - 8080:80
+    environment:
+      JOOMLA_DB_HOST: db
+      JOOMLA_DB_USER: joomla
+      JOOMLA_DB_PASSWORD: joomla
+      JOOMLA_DB_NAME: joomla
+    depends_on:
+      - db
+    networks:
+      - net-test
+  db:
+    image: mysql:5.7
+    container_name: wp-mysql
+    volumes:
+      - $PWD/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: joomla
+      MYSQL_USER: joomla
+      MYSQL_PASSWORD: joomla
+    ports:
+      - 3306:3306
+    networks:
+      - net-test
+
+networks:
+  net-test:

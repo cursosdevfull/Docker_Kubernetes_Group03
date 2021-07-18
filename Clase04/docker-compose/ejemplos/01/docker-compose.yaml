@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  web1:
+    image: nginx:alpine
+    container_name: nginx-web1
+    ports:
+      - 8080:80
+    networks:
+      - net-test
+
+  web2:
+    image: httpd
+    container_name: apache-web2
+    ports:
+      - 8081:80
+    networks:
+      - net-test
+
+  web3:
+    image: httpd
+    container_name: apache-web3
+    ports:
+      - 8082:80
+    networks:
+      - net-test
+
+networks:
+  net-test:
