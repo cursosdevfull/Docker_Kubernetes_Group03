@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  frontend:
+    image: localhost:5000/frontend
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    environment:
+      - PORT=3000
+      - SERVICE_API1_ENDPOINT=http://localhost:9010/api
+    ports:
+      - 9000:3000
+    networks:
+      - ms-network
+
+  backend1:
+    image: localhost:5000/backend1
+    build:
+      context: .
+      dockerfile: backend1/Dockerfile
+    environment:
+      - PORT=3010
+      - SERVICE_API2_ENDPOINT=http://backend2:3020/api
+    ports:
+      - 9010:3010
+    networks:
+      - ms-network
+
+  backend2:
+    image: localhost:5000/backend2
+    build:
+      context: .
+      dockerfile: backend2/Dockerfile
+    environment:
+      - PORT=3020
+    networks:
+      - ms-network
+
+networks:
+  ms-network:
