@@ -109,3 +109,13 @@ docker login -u AWS -p $(aws ecr get-login-password --region us-east-2) 28286506
 ```
 docker compose -f docker-compose-aws.yaml push
 ```
+
+### Despliegue
+
+- Ejecutar todos los manifiestos usando _"kubectl apply"_
+
+### Obtener la dirección o dominio de la aplicación (del balanceador)
+
+```
+kubectl get ing
+```
